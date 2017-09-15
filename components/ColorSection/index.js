@@ -2,15 +2,14 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
-const ColorSection = () => {
+const ColorSection = ({ color }) => {
   return (
     <View style={styles.container}>
       <Text>Current Colour</Text>
-      <View style={styles.displayColour}>
-        <Text>+</Text>
+      <View style={[styles.displayColour, {backgroundColor: `rgb(${color.red},${color.green},${color.blue})`}]}>
       </View>
       <View style={styles.currentValue}>
-        <Text>rgb(0,0,0)</Text>
+        <Text>{`rgb(${color.red},${color.green},${color.blue})`}</Text>
       </View>
     </View>
   );
@@ -26,7 +25,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   displayColour: {
-    backgroundColor: "black",
     flex: 2,
     marginVertical: 15
   },

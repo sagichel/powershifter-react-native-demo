@@ -6,13 +6,42 @@ import ColorSection from '../components/ColorSection';
 
 class PickerLayout extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      colors: {
+        red: 0,
+        green: 0,
+        blue: 0
+      }
+    }
+    this.handleColorChange = this.handleColorChange.bind(this);
+  };
+
+  handleColorChange = (value, label) => {
+    let newColor;
+    switch (label) {
+      case 'red':
+        newColor = { red: value }
+        break;
+      case 'blue':
+        newColor = { blue: value }
+        break;
+      default:
+        newColor = { green: value }
+        break;
+    };
+    const newColors = Object.assign(this.state.colors, newColor);
+    this.setState({ colors: newColors});
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.content}>
-          <ColorSection />
+          <ColorSection color={this.state.colors}/>
         </View>
-        <PickerSection />
+        <PickerSection colors={this.state.colors} handleColorChange={this.handleColorChange} />
       </View>
     );
   }
